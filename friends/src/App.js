@@ -1,12 +1,18 @@
 import React from 'react';
 import './App.css';
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import axios from 'axios'
+import styled from 'styled-components'
 
 import Friends from './Components/Friends';
+import FriendForm from './Components/FriendForm';
 
 
+const AppDiv = styled.div`
+width: 70%;
+margin: 0 auto;
 
+`
 
 class App extends React.Component {
 
@@ -27,14 +33,42 @@ class App extends React.Component {
       })
   }
 
+  addFriend = newFriend => {
+    axios
+      .post('http://localhost:5000/friends', newFriend)
+      .then(res => {
+        this.setState({
+          friends: res.data
+        })
+
+        this.props.history.push('/')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  updateFriend = updatedFriend => {
+    axios
+      .put(`http://localhost:5000/friends/${updatedFriend.id}`, updatedFriend)
+      .then(res => {
+
+      })
+      .catch(err=> {
+
+      })
+  }
+
 
   render() {
 
     return (
-      <div className="App">
+      <AppDiv>
         <h1>Hello</h1>
-        <Route path='/' render={(props) => <Friends {...props} friends={this.state.friends} />} />
-      </div>
+        <Link to='/'>Home</Link>
+        <Route exact path='/' render={() => <Friends friends={this.state.friends} />} />
+        <Route path='/add-friend' render={() => <FriendForm friends={this.state.friends} addFriend={this.addFriend}/>}/>
+      </AppDiv>
     );
   }
 }
