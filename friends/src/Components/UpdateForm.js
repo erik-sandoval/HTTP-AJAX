@@ -3,11 +3,7 @@ import React from 'react'
 class UpdateForm extends React.Component {
 
     state = {
-        friend: {
-            name: '',
-            age: '',
-            email: ''
-        }
+        friend: this.props.friend.active
     }
 
     componentDidMount() {
@@ -16,7 +12,7 @@ class UpdateForm extends React.Component {
         })
     }
 
-    addFriend = event => {
+    handleChange = event => {
         const name = event.target.name
         const value = event.target.value
 
@@ -31,31 +27,32 @@ class UpdateForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        this.props.updateFriend(this.state.friend)
+        this.props.history.push('/')
     }
 
     render() {
-        console.log(this.state.friends)
         return (
             <form onSubmit={this.handleSubmit}>
                 Name: <input
-                    onChange={this.addFriend}
+                    onChange={this.handleChange}
                     name="name"
                     value={this.state.friend.name}
                     type="text">
                 </input>
                 Age: <input
-                    onChange={this.addFriend}
+                    onChange={this.handleChange}
                     name="age"
                     value={this.state.friend.age}
                     type="number">
                 </input>
                 Contact: <input
-                    onChange={this.addFriend}
+                    onChange={this.handleChange}
                     name="email"
                     value={this.state.friend.email}
                     type="string">
                 </input>
-                <button>Add Friend</button>
+                <button>Update Friend</button>
             </form>
         )
     }

@@ -17,7 +17,7 @@ const Friends = (props) => {
         <FriendsDiv>
             <Link to="/add-friend">Add Friend</Link>
             {props.friends.map(friend => (
-                <FriendCard key={friend.id} friend={friend} />
+                <FriendCard {...props} key={friend.id} friend={friend} setActiveFriend={props.setActiveFriend}/>
             ))}
         </FriendsDiv>
     )

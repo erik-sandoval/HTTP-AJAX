@@ -44,7 +44,6 @@ class FriendForm extends React.Component {
     }
 
     render() {
-        console.log(this.state.friends)
         return (
             <form onSubmit={this.handleSubmit}>
                 Name: <input
