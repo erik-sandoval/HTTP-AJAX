@@ -13,11 +13,13 @@ const FriendsDiv = styled.div`
 `
 
 const Friends = (props) => {
+    console.log(props)
     return (
         <FriendsDiv>
             <Link to="/add-friend">Add Friend</Link>
             {props.friends.map(friend => (
-                <FriendCard {...props} key={friend.id} friend={friend} setActiveFriend={props.setActiveFriend}/>
+                <FriendCard {...props} key={friend.id} friend={friend} setActiveFriend={props.setActiveFriend}
+                deleteFriend={props.deleteFriend} />
             ))}
         </FriendsDiv>
     )

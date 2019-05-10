@@ -63,6 +63,19 @@ class App extends React.Component {
       })
   }
 
+  deleteFriend = deleteFriend => {
+    axios
+      .delete(`http://localhost:5000/friends/${deleteFriend.id}`, deleteFriend)
+      .then(res => {
+        this.setState({
+          friends: res.data
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   setActiveFriend = friend => {
     this.setState({
       active: friend
@@ -75,7 +88,7 @@ class App extends React.Component {
       <AppDiv>
         <h1>Hello</h1>
         <Link to='/'>Home</Link>
-        <Route exact path='/' render={props => <Friends {...props} friends={this.state.friends} setActiveFriend={this.setActiveFriend} />} />
+        <Route exact path='/' render={props => <Friends {...props} friends={this.state.friends} setActiveFriend={this.setActiveFriend} deleteFriend={this.deleteFriend}/>} />
         <Route path='/add-friend' render={props => <FriendForm {...props} friends={this.state.friends} addFriend={this.addFriend} />} />
         <Route path='/update-friend' render={props => <UpdateForm {...props} friend={this.state} updateFriend={this.updateFriend} />} />
       </AppDiv>

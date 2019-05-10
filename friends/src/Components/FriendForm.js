@@ -50,7 +50,7 @@ class FriendForm extends React.Component {
                     onChange={this.handleChange}
                     name="name"
                     value={this.state.friend.name}
-                    type="text">
+                    type="string">
                 </input>
                 Age: <input
                     onChange={this.handleChange}

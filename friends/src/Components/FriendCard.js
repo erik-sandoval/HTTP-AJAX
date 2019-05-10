@@ -13,13 +13,19 @@ const FriendCard = props => {
         props.setActiveFriend(props.friend)
         props.history.push('/update-friend')
     }
+
+    const deleteFriend = event => {
+        event.preventDefault();
+        props.deleteFriend(props.friend)
+    }
+
     return (
         <FriendCardDiv>
             <h1>Name: {props.friend.name}</h1>
             <h3>Age: {props.friend.age}</h3>
             <h3>Contact: <a href={`mailto: ${props.friend.email}`}>{props.friend.email}</a></h3>
             <button onClick={updateFriend}>Update Friend</button>
-            <button>Delete Friend</button>
+            <button onClick={deleteFriend}>Delete Friend</button>
         </FriendCardDiv>
     )
 }
